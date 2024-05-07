@@ -13,8 +13,7 @@ final Logger log = Logger();
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(MyApp());
 }
@@ -29,6 +28,7 @@ class MyApp extends StatelessWidget {
 
   Future<SudokuState> _loadState() async {
     await _initEffect();
+    await Future.delayed(Duration(seconds: 3));
     return await SudokuState.resumeFromDB();
   }
 
@@ -41,10 +41,8 @@ class MyApp extends StatelessWidget {
           return Container(
               color: Colors.white,
               alignment: Alignment.center,
-              child: Center(
-                  child: Text('Sudoku Application initializing...',
-                      style: TextStyle(color: Colors.black),
-                      textDirection: TextDirection.ltr)));
+              child:
+                  Center(child: Text('Sudoku Application initializing...', style: TextStyle(color: Colors.black), textDirection: TextDirection.ltr)));
         }
         if (snapshot.hasError) {
           log.w("here is builder future throws error you shoud see it");
